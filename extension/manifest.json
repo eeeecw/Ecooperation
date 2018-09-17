@@ -2,7 +2,16 @@
   "name": "E互助",
   "version": "1.0",
   "description": "E互助社区,开发中",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
   "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
@@ -16,21 +25,21 @@
 			"run_at": "document_end"
 		}
 	],
-  "page_action": {
+  "browser_action": {
     "default_popup": "popup.html",
     "default_title": "E互助功能面板",
     "default_icon": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png",
-      "48": "images/get_started48.png",
-      "128": "images/get_started128.png"
+      "16": "images/logo16.png",
+      "32": "images/logo32.png",
+      "48": "images/logo48.png",
+      "128": "images/logo128.png"
     }
   },
   "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
   },
   "manifest_version": 2
 }
