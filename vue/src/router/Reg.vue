@@ -1,22 +1,34 @@
 <template>
   <div class="container">
+    <router-link class="go-back" to="/">&lt;&nbsp;返回登录</router-link>
     <div class="user-header">
       <img src="http://thyrsi.com/t6/371/1537152332x-1566688526.jpg" alt="用户头像">
     </div>
     <input id="user" class="user" autocomplete="off" type="text">
     <input id="pass" class="pass" autocomplete="off" type="password">
-    <button id="login" class="loging-btn login ripple">登录</button>
+    <button id="login" @click="reg" class="loging-btn login ripple">注册</button>
     <div class="footer">
       <a class="footer-link" href="">忘记密码</a>
       <a class="footer-link" href="">互助论坛</a>
-      <router-link class="footer-link" to="/reg">注册新号</router-link>
+      <router-link class="footer-link" to="/">已有账号</router-link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'login'
+  name: 'reg',
+  date () {
+    return {}
+  },
+  methods: {
+    reg () {
+      console.log(window.fingerprint)
+      console.log('点击了注册')
+      console.log(this.$api)
+      // this.$api.get('', {name: 'chenwei'})
+    }
+  }
 }
 </script>
 
@@ -26,6 +38,13 @@ export default {
   height: 100%;
   position: relative;
   background: linear-gradient(#afe6ee, #e9d8c7);
+}
+.go-back{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  text-decoration: none;
+  color: #1dadeb;
 }
 .loging-btn {
   height: 30px;

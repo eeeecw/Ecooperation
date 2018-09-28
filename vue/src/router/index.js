@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Reg from '@/components/Reg'
-import User from '@/components/User'
-import Setting from '@/components/Setting'
+import Login from './Login'
+import Reg from './Reg'
+import User from './User'
+import Setting from './Setting'
 
 Vue.use(Router)
 

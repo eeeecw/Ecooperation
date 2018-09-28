@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自己测试玩</title>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.8.1/fingerprint2.min.js"></script>
+  <script>
+    new Fingerprint2({
+        user_agent: false,
+        language: false,
+        color_depth: false,
+        device_memory: false,
+        hardware_concurrency: false,
+        resolution: false,
+        available_resolution: false,
+        timezone_offset: false,
+        session_storage: false,
+        local_storage: false,
+        indexed_db: false,
+        open_database: false,
+        cpu_class: false,
+        navigator_platform: false,
+        regular_plugins: false,
+        canvas: true,
+        webgl: true,
+        webgl_vendor: false,
+        adblock: false,
+        has_lied_languages: false,
+        has_lied_resolution: false,
+        has_lied_os: false,
+        has_lied_browser: false,
+        touch_support: false,
+        js_fonts: false
+      }).get(function(result, components) {
+      console.log(result) // a hash, representing your device fingerprint
+      console.log(components) // an array of FP components
+    })
+  </script>
+</body>
+</html>
