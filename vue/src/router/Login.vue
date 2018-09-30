@@ -36,8 +36,13 @@ export default {
     login () {
       console.log(window.fingerprint)
       console.log('点击了登录')
-      this.$api.get('', {
+      this.$api.get('/Eup/index.php?user.reg', {
         name: 'chenwei'
+      })
+      this.$toast({
+        message: '提示',
+        position: 'bottom',
+        duration: 3000
       })
     }
   }
