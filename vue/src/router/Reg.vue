@@ -4,8 +4,8 @@
     <div class="user-header">
       <img src="http://thyrsi.com/t6/371/1537152332x-1566688526.jpg" alt="用户头像">
     </div>
-    <input id="user" class="user" autocomplete="off" type="text">
-    <input id="pass" class="pass" autocomplete="off" type="password">
+    <input v-model="user" id="user" class="user" autocomplete="off" type="text">
+    <input v-model="pass" id="pass" class="pass" autocomplete="off" type="password">
     <button id="login" @click="reg" class="loging-btn login ripple">注册</button>
     <div class="footer">
       <a class="footer-link" href="">忘记密码</a>
@@ -16,17 +16,91 @@
 </template>
 
 <script>
+import fingerprintjs from 'fingerprintjs2'
 export default {
   name: 'reg',
-  date () {
-    return {}
+  data () {
+    return {
+      user: '', // 账户
+      pass: '' // 密码
+    }
+  },
+  created () {
+    for (var i = 0; i < 2; i++) {
+      fingerprintjs().get(res => {
+        window.fingerprint = res
+        // console.log(arr)
+      })
+    }
+    // console.log(this.fingerprint)
   },
   methods: {
     reg () {
-      console.log(window.fingerprint)
-      console.log('点击了注册')
-      console.log(this.$api)
-      // this.$api.get('', {name: 'chenwei'})
+      if (!this.user) {
+        return this.$toast({
+          message: '请输入用户名',
+          position: 'bottom',
+          duration: 1500
+        })
+      }
+      if (this.user.length < 6 || this.user.length > 20) {
+        return this.$toast({
+          message: '用户名长度不合法',
+          position: 'bottom',
+          duration: 1500
+        })
+      }
+      if (this.$validate.chinese.test(this.user)) {
+        return this.$toast({
+          message: '用户名不支持汉字',
+          position: 'bottom',
+          duration: 1500
+        })
+      }
+      if (!this.pass) {
+        return this.$toast({
+          message: '请输入密码',
+          position: 'bottom',
+          duration: 1500
+        })
+      }
+      if (this.pass.length < 6 || this.pass.length > 20) {
+        return this.$toast({
+          message: '密码长度不合法',
+          position: 'bottom',
+          duration: 1500
+        })
+      }
+      if (this.$validate.chinese.test(this.pass)) {
+        return this.$toast({
+          message: '密码不支持汉字',
+          position: 'bottom',
+          duration: 1500
+        })
+      }
+      this.$api.get('/Eup/index.php?user.reg', {
+        user: this.user,
+        pass: this.pass,
+        fingerprint: window.fingerprint
+      }).then(res => {
+        this.$toast({
+          message: res.msg,
+          position: 'bottom',
+          duration: 1500
+        })
+        if (res.ret === 0) {
+          let that = this
+          setTimeout(() => {
+            that.$router.push('/user')
+          }, 1500)
+        }
+      }).catch(() => {
+        return this.$toast({
+          message: '网络错误，稍后重试',
+          position: 'bottom',
+          duration: 1500
+        })
+      })
     }
   }
 }

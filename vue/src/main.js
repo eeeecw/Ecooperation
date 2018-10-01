@@ -5,12 +5,14 @@ import App from './App'
 import router from './router'
 import utils from './utils/'
 import MintUI from 'mint-ui'
+import VueCookie from 'vue-cookies'
 import 'mint-ui/lib/style.css'
 
 // Vue.$api = Vue.prototype.$api = api
 Vue.config.productionTip = false
 Vue.use(utils)
 Vue.use(MintUI)
+Vue.use(VueCookie)
 
 /* eslint-disable no-new */
 new Vue({

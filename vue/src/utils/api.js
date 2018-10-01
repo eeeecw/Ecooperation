@@ -4,6 +4,7 @@ import Axios from 'axios'
 
 Axios.defaults.baseURL = 'http://www.eeeezq.com' // 基础路由
 Axios.defaults.timeout = 200000 // 超时时间
+// Axios.defaults.withCredentials = true // 请求带 cookie
 Axios.defaults.headers = { // 默认请求头
   'Content-Type': 'application/x-www-form-urlencoded'
 }

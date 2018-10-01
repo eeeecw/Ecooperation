@@ -8,7 +8,21 @@
 class User extends MpController {
 
     public function doreg($name = '') {
-        echo "我是嘿嘿嘿";
+      header("Content-type: text/html; charset=utf-8");
+      $res = array();
+      $res['ret'] = 0;
+      $res['msg'] = '注册成功';
+      $res['content'] = 'husdfhiwqerbiocxv78';
+      echo json_encode($res);
+    }
+
+    public function dologin($name = '') {
+      header("Content-type: text/html; charset=utf-8");
+      $res = array();
+      $res['ret'] = 0;
+      $res['msg'] = '登录成功';
+      $res['content'] = 'husdfhiwqerbiocxv78s';
+      echo json_encode($res);
     }
 
 }

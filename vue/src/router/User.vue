@@ -6,10 +6,20 @@
 
 <script>
 export default {
-  name: 'user'
+  name: 'user',
+  data () {
+    return {}
+  },
+  created () {
+    console.log(this.$cookies.get('token'))
+  }
 }
 </script>
 
 <style scoped>
-
+.container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 </style>
