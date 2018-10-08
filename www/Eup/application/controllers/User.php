@@ -25,4 +25,21 @@ class User extends MpController {
       echo json_encode($res);
     }
 
+    public function dostatus($name = '') {
+        header("Content-type: text/html; charset=utf-8");
+        $res = array();
+        $res['ret'] = 1;
+        $res['msg'] = '用户绑定了数据';
+        $res['content'] = 'husdfhiwqerbiocxv78s';
+        echo json_encode($res);
+    }
+
+    public function dobundBili($name = '') {
+        header("Content-type: text/html; charset=utf-8");
+        $res = array();
+        $res['ret'] = 0;
+        $res['msg'] = '绑定成功';
+        $res['content'] = 'husdfhiwqerbiocxv78s';
+        echo json_encode($res);
+    }
 }

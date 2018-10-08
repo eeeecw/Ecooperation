@@ -1,8 +1,10 @@
 {
   "name": "E互助",
-  "version": "1.0",
-  "description": "E互助社区,开发中",
+  "version": "1.2",
+  "description": "E互助社区,vue测试版本",
   "permissions": [
+    "webRequest",
+    "webRequestBlocking",
     "contextMenus",
     "tabs",
     "notifications",
@@ -15,7 +17,7 @@
   "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": true
   },
   "content_scripts": 
 	[
@@ -24,7 +26,8 @@
 			"js": ["js/jquery-1.8.3.js","js/axios.js" , "js/main.js"],
 			"run_at": "document_end"
 		}
-	],
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "browser_action": {
     "default_popup": "popup.html",
     "default_title": "E互助功能面板",
