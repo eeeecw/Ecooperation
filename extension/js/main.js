@@ -17,6 +17,21 @@ $(document).ready(function(){
   // .catch(function (error) {
   //   console.log(error);
   // });
+  function injectCustomJs(jsPath)
+  {
+    jsPath = jsPath || 'js/inject.js';
+    var temp = document.createElement('script');
+    temp.setAttribute('type', 'text/javascript');
+    // 获得的地址类似：chrome-extension://ihcokhadfjfchaeagdoclpnjdiokfakg/js/inject.js
+    temp.src = chrome.extension.getURL(jsPath);
+    temp.onload = function()
+    {
+        // 放在页面不好看，执行完后移除掉
+        this.parentNode.removeChild(this);
+    };
+    document.head.appendChild(temp);
+  }
+  injectCustomJs()
 
   function getCookie(name){
     var strcookie = document.cookie;//获取cookie字符串
@@ -33,11 +48,12 @@ $(document).ready(function(){
   console.log(getCookie('DedeUserID'))
 
   function bundBili (token) {
+    console.log('收到插件绑定请求')
     if (getCookie('DedeUserID')) {
-      let img = $('.face')
       return {
-        biid: getCookie('DedeUserID'),
-        head: img[0].src
+        mid: window.UserStatus.userInfo.mid,
+        face: window.UserStatus.userInfo.face,
+        uname: window.UserStatus.userInfo.uname,
       }
       // axios.post('https://www.eeeezq.com/Eup/index.php?user.bundBili', {
       //   token: token,
@@ -55,8 +71,9 @@ $(document).ready(function(){
       //   }
       // })
     }
+    console.log('当前未登录')
     return {
-      biid: 0,
+      mid: 0,
       msg: '请先登录哔哩哔哩'
     }
   }
@@ -64,8 +81,20 @@ $(document).ready(function(){
   {
     // console.log(sender.tab ?"from a content script:" + sender.tab.url :"from the extension");
     if (request.type === 1) {
+      console.log(window)
       sendResponse(bundBili ())
     }
     // sendResponse({msg: '成功通讯'});
   });
+
+  // 监听处理 inject-script 传来的信息
+  window.addEventListener("message", function(e)
+  {
+    switch (e.data.type) {
+      case 'UserStatus':
+        window.UserStatus = {}
+        window.UserStatus.userInfo = e.data.data
+        break;
+    }
+  }, false);
 });

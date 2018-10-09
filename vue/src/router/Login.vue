@@ -91,7 +91,7 @@ export default {
           this.$cookies.set('token', res.content)
           let that = this
           setTimeout(() => {
-            that.$router.push('/user')
+            that.$router.push('/user/status')
           }, 1500)
         }
       }).catch(() => {

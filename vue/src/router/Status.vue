@@ -5,7 +5,11 @@
       <mt-button @click="bundBili" class="no-bunding_btn" type="primary">绑定</mt-button>
     </div>
     <div v-if="init === 2" class="status">
-      互助<mt-switch @change="changeSwitch" v-model="start">{{ ['关闭', '开始'][+start] }}</mt-switch>
+      <div class="status_item">今日获赞：<span class="status_num">123456</span></div>
+      <div class="status_item">总获赞：<span class="status_num">123456</span></div>
+      <div class="status_item">今日互助：<span class="status_num">123456</span></div>
+      <div class="status_item">总互助：<span class="status_num">123456</span></div>
+      <div class="status_item"><span class="status_item_switch">互助状态：{{ ['关闭', '开始'][+start] }}</span><mt-switch class="status_mt-switch" @change="changeSwitch" v-model="start"></mt-switch></div>
     </div>
   </div>
 </template>
@@ -24,7 +28,7 @@ export default {
       token: this.$cookies.get('token')
     }).then(res => {
       if (res.ret === 0) {
-        this.init = 2
+        this.init = 2 // 已经绑定用户数据
         if (window.start) {
           this.start = true
         } else {
@@ -32,7 +36,7 @@ export default {
           window.start = false
         }
       } else {
-        this.init = 1
+        this.init = 1 // 未绑定用户数据
       }
     })
   },
@@ -45,8 +49,9 @@ export default {
       this.$utils.sendMessageToContentScript({
         type: 1
       }, res => { // 这里是向 content-script 通信的回调函数
-        if (res.biid) { // 根据 biid 判断是否登录
+        if (res.mid) { // 根据 mid 判断是否登录
           res.token = this.$cookies.get('token')
+          console.log(res)
           this.$api.post('/Eup/index.php?user.bundBili', res).then(res => {
             return that.$toast({
               message: res.msg,
@@ -77,5 +82,27 @@ export default {
 }
 .no-bunding_btn{
   width: 100%;
+}
+.status{
+  width: 100%;
+  text-align: center;
+}
+.status_item{
+  height: 60px;
+  line-height: 60px;
+  box-sizing: border-box;
+  border-bottom: #dedfe0 1px solid;
+}
+.status_item_switch{
+  display: inline-block;
+}
+.status_mt-switch{
+  margin-left: 15px;
+  height: 44px;
+  vertical-align: middle;
+  display: inline-block;
+}
+.status_num{
+  margin-left: 8px;
 }
 </style>
