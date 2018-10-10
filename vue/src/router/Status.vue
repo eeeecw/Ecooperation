@@ -10,6 +10,7 @@
       <div class="status_item">今日互助：<span class="status_num">123456</span></div>
       <div class="status_item">总互助：<span class="status_num">123456</span></div>
       <div class="status_item"><span class="status_item_switch">互助状态：{{ ['关闭', '开始'][+start] }}</span><mt-switch class="status_mt-switch" @change="changeSwitch" v-model="start"></mt-switch></div>
+      <div class="status_item"><a href="http://www.baidu.com" target="_blank">帮助</a><span class="status_num"></span></div>
     </div>
   </div>
 </template>
@@ -84,6 +85,7 @@ export default {
   width: 100%;
 }
 .status{
+  font-size: 14px;
   width: 100%;
   text-align: center;
 }
@@ -104,5 +106,12 @@ export default {
 }
 .status_num{
   margin-left: 8px;
+}
+a{
+  text-decoration: none;
+  color: blue;
+}
+a:visited{
+  color: blue;
 }
 </style>
